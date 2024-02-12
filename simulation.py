@@ -15,12 +15,14 @@ class SIMULATION:
         self.world = WORLD()
         self.robot = ROBOT()
 
+
     def Run(self):
         for timeStep in range(c.sim_length):
             p.stepSimulation()
             self.robot.Sense(timeStep)
+            self.robot.Think()
             self.robot.Act(timeStep)
-            time.sleep(1 / 200)
+            time.sleep(1 / 60)
 
     def __del__(self):
         p.disconnect()
