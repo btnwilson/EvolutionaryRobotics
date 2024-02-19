@@ -1,6 +1,6 @@
 import numpy as np
 
-sim_length = 5000
+sim_length = 200
 amplitudeB = np.pi/8
 frequencyB = 8
 phaseOffsetB = 0
