@@ -8,3 +8,4 @@ amplitudeF = np.pi/8
 frequencyF = 8
 phaseOffsetF = np.pi/2
 numberOfGenerations = 10
+populationSize = 10
