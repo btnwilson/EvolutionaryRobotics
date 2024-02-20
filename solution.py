@@ -14,7 +14,7 @@ class SOLUTION:
         self.Create_World()
         self.Create_Robot()
         self.Create_Brain()
-        os.system(f"start /B python simulate.py {directOrGUI} {str(self.myID)}")
+        os.system(f"start /B python simulate.py {directOrGUI} {str(self.myID)} 2>NUL")
         while not os.path.exists(f"fitness{self.myID}.txt"):
             time.sleep(0.01)
         file = open(f"fitness{self.myID}.txt", "r")
