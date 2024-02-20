@@ -12,7 +12,8 @@ class ROBOT:
         pyrosim.Prepare_To_Simulate(self.robotId)
         self.Prepare_To_Sense()
         self.Prepare_To_Act()
-        self.nn = NEURAL_NETWORK('brain.nndf')
+        self.nn = NEURAL_NETWORK("brain.nndf")
+        #self.stateOfLinkZero = None
 
     def Prepare_To_Sense(self):
         self.sensors = {}
@@ -37,4 +38,13 @@ class ROBOT:
 
     def Think(self):
         self.nn.Update()
-        self.nn.Print()
+        #self.nn.Print()
+
+    def Get_Fitness(self):
+        stateOfLinkZero = p.getLinkState(self.robotId,0)
+        positionOfLinkZero = stateOfLinkZero[0]
+        xCoordinateOfLinkZero = positionOfLinkZero[0]
+
+        file = open("fitness.txt", "w")
+        file.write(str(xCoordinateOfLinkZero))
+        file.close()

@@ -1,16 +1,21 @@
 import numpy as np
 import pyrosim.pyrosim as pyrosim
 import os
+import random
 
 class SOLUTION:
     def __init__(self):
         self.weights = np.random.rand(3, 2) * 2 - 1
+        self.fitness = None
 
-    def Evaluate(self):
+    def Evaluate(self, directOrGUI):
         self.Create_World()
         self.Create_Robot()
         self.Create_Brain()
-        os.system("py simulate.py")
+        os.system(f"python simulate.py {directOrGUI}")
+        file = open("fitness.txt", "r")
+        self.fitness = float(file.read())
+        file.close()
 
 
     def Create_World(self):
@@ -43,3 +48,10 @@ class SOLUTION:
         for currentRow in range(0, 3):
             for currentColumn in range(0, 2):
                 pyrosim.Send_Synapse(sourceNeuronName=currentRow, targetNeuronName=currentColumn+3, weight=self.weights[currentRow, currentColumn])
+
+        pyrosim.End()
+
+    def Mutate(self):
+        row = random.randint(0,2)
+        col = random.randint(0,1)
+        self.weights[row, col] = random.random() * 2 - 1
